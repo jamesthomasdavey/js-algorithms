@@ -1,20 +1,15 @@
-// frequenciy counter
-
-const same = (arr1, arr2) => {
-  const frequencyCounter1 = {};
-  const frequencyCounter2 = {};
-  arr1.forEach(val => {
-    frequencyCounter1[val] = frequencyCounter1[val] ? frequencyCounter1[val]++ : 1;
-  });
-  arr2.forEach(val => {
-    frequencyCounter2[val] = frequencyCounter2[val] ? frequencyCounter2[val]++ : 1;
-  });
-  for (let key in frequencyCounter1) {
-    if (frequencyCounter2[key ** 2] !== frequencyCounter1[key]) {
-      return false;
+const countUniqueValues = arr => {
+  if (arr.length === 0) {
+    return 0;
+  }
+  let i = 0;
+  for (let j = 1; j < arr.length; j++) {
+    if (arr[i] !== arr[j]) {
+      i++;
+      arr[i] = arr[j];
     }
   }
-  return true;
+  return i + 1;
 };
 
-console.log(same([1, 2, 3], [1, 4, 8]));
+console.log(countUniqueValues([0, 0, 1, 2, 2]));
