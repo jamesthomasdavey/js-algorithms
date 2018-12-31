@@ -1,15 +1,12 @@
-const countUniqueValues = arr => {
-  if (arr.length === 0) {
-    return 0;
-  }
-  let i = 0;
-  for (let j = 1; j < arr.length; j++) {
-    if (arr[i] !== arr[j]) {
-      i++;
-      arr[i] = arr[j];
+const areThereDuplicates = (...arr) => {
+  const lookup = {};
+  for (let item of arr) {
+    lookup[item] = (lookup[item] || 0) + 1;
+    if (lookup[item] > 1) {
+      return true;
     }
   }
-  return i + 1;
-};
+  return false;
+}
 
-console.log(countUniqueValues([0, 0, 1, 2, 2]));
+areThereDuplicates(1, 2, 3, 3);
