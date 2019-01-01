@@ -58,13 +58,10 @@ const averagePair = (arr, num) => {
   // loop through array while left is less than right
   while (left < right) {
     // if the average equals the number, return true
-    if ((arr[left] + arr[right]) / 2 === num) {
-      return true;
-    } else if ((arr[left] + arr[right]) / 2 > num) {
-      right--;
-    } else if ((arr[left] + arr[right]) / 2 < num) {
-      left++;
-    }
+    let avg = (arr[left] + arr[right]) / 2;
+    if (avg === num) return true;
+    else if (avg > num) right--;
+    else left++;
   }
   return false;
 };
@@ -103,3 +100,75 @@ const isSubsequence = (str1, str2) => {
 console.log('isSubsequence');
 console.log(isSubsequence('hello', 'hell o world')); // true
 console.log(isSubsequence('hella', 'hell o world')); // false
+
+// maxSubarraySum
+
+const maxSubarraySum = (arr, num) => {
+  // short circuit if arr length is less than num
+  if (arr.length < num) return null;
+  // create max as -infinity
+  let max = -Infinity;
+  // create a window variable
+  let window = 0;
+  // create initial window
+  for (let i = 0; i < num; i++) {
+    window += arr[i];
+  }
+  max = window > max ? window : max;
+  // loop through array and replace max with window if window is larger
+  for (let i = 0; i < arr.length - num; i++) {
+    window -= arr[i];
+    window += arr[i + num];
+    max = window > max ? window : max;
+  }
+  return max;
+  // return max
+};
+
+console.log('maxSubarraySum');
+console.log(maxSubarraySum([1, 2, 3, 4], 2)); // 7
+console.log(maxSubarraySum([1, 2, 3, 4], 3)); // 9
+
+// minSubArrayLen
+
+const minSubArrayLen = (arr, num) => {
+  // create left pointer at 0
+  let left = 0;
+  // create right pointer at 0
+  let right = 0;
+  // create number to hold current sum
+  let currentSum = 0;
+  // create number to hold the minimum length
+  let minLength = Infinity;
+  // loop through whole
+  while (left < arr.length) {
+    // if sum is less than num
+    if (currentSum < num) {
+      // increase right pointer if there is room
+      if (right < arr.length) {
+        currentSum += arr[right];
+        right++;
+      } else {
+        // otherwise break
+        break;
+      }
+    } else {
+      // swap min length if it fits
+      if (right - left < minLength) {
+        minLength = right - left;
+      }
+      // subtract leftmost variable before incrementing
+      currentSum -= arr[left];
+      left++;
+    }
+  }
+  if (minLength === Infinity) {
+    return 0;
+  } else {
+    return minLength;
+  }
+};
+
+console.log('minSubArrayLen');
+console.log(minSubArrayLen([1, 2, 3, 4, 5], 9)); // 2
+console.log(minSubArrayLen([1, 2, 3], 5)); // 2
