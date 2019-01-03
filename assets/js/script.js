@@ -332,3 +332,19 @@ console.log(flatten([1, 2, 3, [4, 5]])); // [1, 2, 3, 4, 5]
 console.log(flatten([1, [2, [3, 4], [[5]]]])); // [1, 2, 3, 4, 5]
 console.log(flatten([[1], [2], [3]])); // [1,2,3]
 console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])); // [1,2,3]
+
+// capitalizeFirst
+
+const capitalizeFirst = arr => {
+  const result = [];
+  const helper = arr => {
+    if (arr.length === 0) return;
+    const splitUp = arr[0].split("");
+    result.push(splitUp[0].toUpperCase() + splitUp.slice(1).join(""));
+    helper(arr.slice(1));
+  }
+  helper(arr);
+  return result;
+}
+
+console.log(capitalizeFirst(['car','taco','banana'])); // ['Car','Taco','Banana']
