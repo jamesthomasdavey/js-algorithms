@@ -299,3 +299,17 @@ const isPalindrome = str => {
 console.log('isPalindrome');
 console.log(isPalindrome('racecar')); // true
 console.log(isPalindrome('whatever')); // false
+
+// someRecursive
+
+const someRecursive = (arr, callback) => {
+  if (arr.length === 0) return false;
+  if (callback(arr[0])) return true;
+  return someRecursive(arr.slice(1), callback);
+}
+
+const isOdd = num => num % 2 !== 0;
+
+console.log('someRecursive');
+console.log(someRecursive([1,2,3,4,5], isOdd)); // [1,3,5]
+console.log(someRecursive([2,4,6], isOdd)); // [3,5]
