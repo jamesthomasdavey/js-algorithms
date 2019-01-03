@@ -280,10 +280,22 @@ console.log(fib(10)); // 55
 // reverse
 
 const reverse = str => {
-  if (str.length === 1) return str
-  return str[str.length - 1] + reverse(str.substring(0, str.length - 1))
-}
+  if (str.length === 1) return str;
+  return str[str.length - 1] + reverse(str.substring(0, str.length - 1));
+};
 
 console.log('reverse');
-console.log(reverse("hello")); // olleh
-console.log(reverse("whatever")); // revetahw
+console.log(reverse('hello')); // olleh
+console.log(reverse('whatever')); // revetahw
+
+// isPalindrome
+
+const isPalindrome = str => {
+  if (str.length === 1 || str.length === 0) return true;
+  if (str[0] !== str[str.length - 1]) return false;
+  return isPalindrome(str.slice(1, str.length - 1));
+};
+
+console.log('isPalindrome');
+console.log(isPalindrome('racecar')); // true
+console.log(isPalindrome('whatever')); // false
