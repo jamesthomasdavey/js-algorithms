@@ -240,6 +240,39 @@ const power = (num1, num2) => {
   return num1 * power(num1, num2 - 1);
 };
 
-console.log(power(2, 0)); // 1
+console.log('power');
 console.log(power(2, 2)); // 4
 console.log(power(2, 4)); // 16
+
+// productOfArray
+
+const productOfArray = arr => {
+  if (arr.length === 1) return arr[0];
+  return arr[0] * productOfArray(arr.slice(1));
+};
+
+console.log('productOfArray');
+console.log(productOfArray([1, 2, 3])); // 6
+console.log(productOfArray([1, 2, 3, 10])); // 60
+
+// recursiveRange
+
+const recursiveRange = num => {
+  if (num === 0) return 0;
+  return num + recursiveRange(num - 1);
+};
+
+console.log('recursiveRange');
+console.log(recursiveRange(6)); // 21
+console.log(recursiveRange(10)); // 55
+
+// fib
+
+const fib = num => {
+  if (num <= 2) return 1;
+  return fib(num - 1) + fib(num - 2);
+};
+
+console.log('fib');
+console.log(fib(4)); // 3
+console.log(fib(10)); // 55
