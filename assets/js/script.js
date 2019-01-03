@@ -306,10 +306,29 @@ const someRecursive = (arr, callback) => {
   if (arr.length === 0) return false;
   if (callback(arr[0])) return true;
   return someRecursive(arr.slice(1), callback);
-}
+};
 
 const isOdd = num => num % 2 !== 0;
 
 console.log('someRecursive');
-console.log(someRecursive([1,2,3,4,5], isOdd)); // [1,3,5]
-console.log(someRecursive([2,4,6], isOdd)); // [3,5]
+console.log(someRecursive([1, 2, 3, 4, 5], isOdd)); // [1,3,5]
+console.log(someRecursive([2, 4, 6], isOdd)); // [3,5]
+
+// flatten
+
+const flatten = matrix => {
+  let result = [];
+  matrix.forEach(arr => {
+    if (Array.isArray(arr)) {
+      result = [...result, ...flatten(arr)];
+    } else {
+      result.push(arr);
+    }
+  });
+  return result;
+};
+
+console.log(flatten([1, 2, 3, [4, 5]])); // [1, 2, 3, 4, 5]
+console.log(flatten([1, [2, [3, 4], [[5]]]])); // [1, 2, 3, 4, 5]
+console.log(flatten([[1], [2], [3]])); // [1,2,3]
+console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])); // [1,2,3]
