@@ -172,3 +172,49 @@ const minSubArrayLen = (arr, num) => {
 console.log('minSubArrayLen');
 console.log(minSubArrayLen([1, 2, 3, 4, 5], 9)); // 2
 console.log(minSubArrayLen([1, 2, 3], 5)); // 2
+
+// findLongestSubstring
+
+const findLongestSubstring = str => {
+  // holds the max length of substring
+  let max = 0;
+  // holds the latest appearence of each character
+  let lookup = {};
+  // holds the index of the start of the substring
+  let start = 0;
+  // loop through string
+  for (let i = 0; i < str.length; i++) {
+    let char = str[i];
+    // if the character is in the lookup object...
+    if (lookup[char]) {
+      // if start is less than the character value, increase start to that value;
+      if (start < lookup[char]) {
+        start = lookup[char];
+      }
+      // change the character value to current index
+      lookup[char] = i;
+    } else {
+      lookup[char] = i;
+      if (i - start > max) {
+        max = i - start;
+      }
+    }
+    // each time we encounter a new character, we store its index in the lookup object
+  }
+  return max;
+};
+
+console.log('findLongestSubstring');
+console.log(findLongestSubstring('hello'));
+console.log(findLongestSubstring('thecatinthehat'));
+
+// factorial
+
+const factorial = num => {
+  if (num === 1) return num;
+  return num * factorial(num - 1);
+};
+
+console.log('factorial');
+console.log(factorial(4));
+console.log(factorial(1));
