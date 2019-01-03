@@ -218,3 +218,20 @@ const factorial = num => {
 console.log('factorial');
 console.log(factorial(4));
 console.log(factorial(1));
+
+// collectOdds
+
+const collectOdds = arr => {
+  const odds = [];
+  const pushToOdds = nums => {
+    if (nums.length === 1) return;
+    if (nums[0] % 2 !== 0) odds.push(nums[0]);
+    pushToOdds(nums.slice(1));
+  };
+  pushToOdds(arr);
+  return odds;
+};
+
+console.log('collectOdds');
+console.log(collectOdds([1, 2, 3, 4, 5, 6, 7]));
+console.log(collectOdds([-1, -2, -3, -4, -5, -6, -7]));
