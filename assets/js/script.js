@@ -222,13 +222,10 @@ console.log(factorial(1));
 // collectOdds
 
 const collectOdds = arr => {
-  const odds = [];
-  const pushToOdds = nums => {
-    if (nums.length === 1) return;
-    if (nums[0] % 2 !== 0) odds.push(nums[0]);
-    pushToOdds(nums.slice(1));
-  };
-  pushToOdds(arr);
+  let odds = [];
+  if (arr.length === 0) return odds;
+  if (arr[0] % 2 !== 0) odds.push(arr[0]);
+  odds = [...odds, ...collectOdds(arr.slice(1))];
   return odds;
 };
 
