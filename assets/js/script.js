@@ -320,7 +320,7 @@ const flatten = matrix => {
   let result = [];
   matrix.forEach(arr => {
     if (Array.isArray(arr)) {
-      result = [...result, ...flatten(arr)];
+      result.push(...flatten(arr));
     } else {
       result.push(arr);
     }
@@ -339,15 +339,16 @@ const capitalizeFirst = arr => {
   const result = [];
   const helper = arr => {
     if (arr.length === 0) return;
-    const splitUp = arr[0].split("");
-    result.push(splitUp[0].toUpperCase() + splitUp.slice(1).join(""));
+    const splitUp = arr[0].split('');
+    result.push(splitUp[0].toUpperCase() + splitUp.slice(1).join(''));
     helper(arr.slice(1));
-  }
+  };
   helper(arr);
   return result;
-}
+};
 
-console.log(capitalizeFirst(['car','taco','banana'])); // ['Car','Taco','Banana']
+console.log('capitalizeFirst');
+console.log(capitalizeFirst(['car', 'taco', 'banana'])); // ['Car','Taco','Banana']
 
 // nestedEvenSum
 
@@ -355,13 +356,13 @@ const nestedEvenSum = obj => {
   let result = 0;
   Object.keys(obj).forEach(k => {
     if (typeof obj[k] === 'object') {
-      result += nestedEvenSum(obj[k])
-    } else if (typeof obj[k] === 'number' && obj[k] %2 ===0) {
+      result += nestedEvenSum(obj[k]);
+    } else if (typeof obj[k] === 'number' && obj[k] % 2 === 0) {
       result += obj[k];
     }
-  })
+  });
   return result;
-}
+};
 
 var obj1 = {
   outer: 2,
@@ -370,18 +371,54 @@ var obj1 = {
     otherObj: {
       superInner: 2,
       notANumber: true,
-      alsoNotANumber: "yup"
+      alsoNotANumber: 'yup'
     }
   }
-}
+};
 
 var obj2 = {
   a: 2,
-  b: {b: 2, bb: {b: 3, bb: {b: 2}}},
-  c: {c: {c: 2}, cc: 'ball', ccc: 5},
+  b: { b: 2, bb: { b: 3, bb: { b: 2 } } },
+  c: { c: { c: 2 }, cc: 'ball', ccc: 5 },
   d: 1,
-  e: {e: {e: 2}, ee: 'car'}
+  e: { e: { e: 2 }, ee: 'car' }
 };
 
+nestedEvenSum('nestedEvenSum'); // 6
 nestedEvenSum(obj1); // 6
 nestedEvenSum(obj2); // 10
+
+// stringifyNumbers
+
+const stringifyNumbers = obj => {
+  const newObj = {};
+  Object.keys(obj).forEach(k => {
+    if (typeof obj[k] === 'number') {
+      newObj[k] = obj[k].toString();
+    } else if (typeof obj[k] === 'object') {
+      if (Array.isArray(obj[k])) {
+        newObj[k] = obj[k].map(val => stringifyNumbers(val));
+      } else {
+        newObj[k] = stringifyNumbers(obj[k]);
+      }
+    } else {
+      newObj[k] = obj[k];
+    }
+  });
+  return newObj;
+};
+
+let obj = {
+  num: 1,
+  test: [],
+  data: {
+    val: 4,
+    info: {
+      isRight: true,
+      random: 66
+    }
+  }
+};
+
+console.log('stringifyNumbers');
+console.log(stringifyNumbers(obj));
