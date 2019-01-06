@@ -458,3 +458,20 @@ console.log(
   binarySearch([1, 3, 15, 22, 24, 33, 62, 45, 50, 51, 52, 74, 88, 92, 105, 167, 322], 16)
 );
 console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
+
+// naiveStringSearch
+
+const naiveStringSearch = (str1, str2) => {
+  let counter = 0;
+  for (let i = 0; i < str1.length - str2.length + 1; i++) {
+    for (let j = 0; j < str2.length; j++) {
+      if (str1[i + j] !== str2[j]) break;
+      if (j === str2.length - 1) counter++;
+    }
+  }
+  return counter;
+};
+
+console.log('naiveStringSearch');
+console.log(naiveStringSearch('hellomyoldfriendoldboy', 'old')); // 2
+console.log(naiveStringSearch('whatisthiswhatamiwhatareyoudoing', 'what')); // 3
