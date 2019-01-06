@@ -475,3 +475,20 @@ const naiveStringSearch = (str1, str2) => {
 console.log('naiveStringSearch');
 console.log(naiveStringSearch('hellomyoldfriendoldboy', 'old')); // 2
 console.log(naiveStringSearch('whatisthiswhatamiwhatareyoudoing', 'what')); // 3
+
+// bubbleSort
+
+const bubbleSort = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    for (let j = 0; j < arr.length - 1; j++) {
+      if (arr[j] > arr[j + 1]) {
+        [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+      }
+    }
+  }
+  return arr;
+};
+
+console.log('bubbleSort');
+console.log(bubbleSort([5, 2, 4, 3, 8, 6, 7, 1]));
+console.log(bubbleSort([55, 21, 42, 93, 6, 18, 22, 14]));
