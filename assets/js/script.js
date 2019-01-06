@@ -438,3 +438,23 @@ console.log('linearSearch');
 console.log(linearSearch([10, 15, 20, 25, 30], 15)); // 1
 console.log(linearSearch([1, 2, 3, 4, 5], 6)); // -2
 console.log(linearSearch([100], 100)); // 0
+
+// binarySearch
+
+const binarySearch = (arr, val) => {
+  let left = 0;
+  let right = arr.length;
+  while (left < right) {
+    const middle = Math.floor((right + left) / 2);
+    if (arr[middle] === val) return middle;
+    if (arr[middle] < val) left = middle + 1;
+    else right = middle;
+  }
+  return -1;
+};
+
+console.log('binarySearch');
+console.log(
+  binarySearch([1, 3, 15, 22, 24, 33, 62, 45, 50, 51, 52, 74, 88, 92, 105, 167, 322], 16)
+);
+console.log(binarySearch([1, 2, 3, 4, 5, 6, 7, 8, 9], 3));
