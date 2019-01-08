@@ -479,12 +479,16 @@ console.log(naiveStringSearch('whatisthiswhatamiwhatareyoudoing', 'what')); // 3
 // bubbleSort
 
 const bubbleSort = arr => {
-  for (let i = 0; i < arr.length; i++) {
+  let noSwaps;
+  for (let i = 0; i < arr.length - 1; i++) {
+    noSwaps = true;
     for (let j = 0; j < arr.length - i - 1; j++) {
       if (arr[j] > arr[j + 1]) {
         [arr[j], arr[j + 1]] = [arr[j + 1], arr[j]];
+        noSwaps = false;
       }
     }
+    if (noSwaps) break;
   }
   return arr;
 };
@@ -492,3 +496,26 @@ const bubbleSort = arr => {
 console.log('bubbleSort');
 console.log(bubbleSort([5, 2, 4, 3, 8, 6, 7, 1]));
 console.log(bubbleSort([55, 21, 42, 93, 6, 18, 22, 14]));
+
+// selectionSort
+
+const selectionSort = arr => {
+  for (let i = 0; i < arr.length; i++) {
+    let min = arr[i];
+    let index = i;
+    for (let j = i + 1; j < arr.length; j++) {
+      if (arr[j] < min) {
+        min = arr[j];
+        index = j;
+      }
+    }
+    if (index !== i) {
+      [arr[i], arr[index]] = [arr[index], arr[i]];
+    }
+  }
+  return arr;
+};
+
+console.log('selectionSort');
+console.log(selectionSort([19, 44, 38, 5, 47, 15]));
+console.log(selectionSort([5, 4, 3, 2, 1, 0]));
