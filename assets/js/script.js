@@ -337,16 +337,11 @@ console.log(flatten([[[[1], [[[2]]], [[[[[[[3]]]]]]]]]])); // [1,2,3]
 
 const capitalizeFirst = arr => {
   const result = [];
-  const helper = arr => {
-    if (arr.length === 0) return;
-    const splitUp = arr[0].split('');
-    result.push(splitUp[0].toUpperCase() + splitUp.slice(1).join(''));
-    helper(arr.slice(1));
-  };
-  helper(arr);
+  if (arr.length === 0) return result;
+  result.push(arr[0][0].toUpperCase() + arr[0].substring(1));
+  result.push(...capitalizeFirst(arr.slice(1)));
   return result;
 };
-
 console.log('capitalizeFirst');
 console.log(capitalizeFirst(['car', 'taco', 'banana'])); // ['Car','Taco','Banana']
 
@@ -384,9 +379,9 @@ var obj2 = {
   e: { e: { e: 2 }, ee: 'car' }
 };
 
-nestedEvenSum('nestedEvenSum'); // 6
-nestedEvenSum(obj1); // 6
-nestedEvenSum(obj2); // 10
+console.log('nestedEvenSum'); // 6
+console.log(nestedEvenSum(obj1)); // 6
+console.log(nestedEvenSum(obj2)); // 10
 
 // stringifyNumbers
 
@@ -436,7 +431,7 @@ const linearSearch = (arr, val) => {
 
 console.log('linearSearch');
 console.log(linearSearch([10, 15, 20, 25, 30], 15)); // 1
-console.log(linearSearch([1, 2, 3, 4, 5], 6)); // -2
+console.log(linearSearch([1, 2, 3, 4, 5], 6)); // -1
 console.log(linearSearch([100], 100)); // 0
 
 // binarySearch
@@ -447,7 +442,7 @@ const binarySearch = (arr, val) => {
   while (left < right) {
     const middle = Math.floor((right + left) / 2);
     if (arr[middle] === val) return middle;
-    if (arr[middle] < val) left = middle + 1;
+    else if (arr[middle] < val) left = middle + 1;
     else right = middle;
   }
   return -1;
@@ -536,3 +531,39 @@ const insertionSort = arr => {
 console.log('insertionSort');
 console.log(insertionSort([1, 2, 3, 0]));
 console.log(insertionSort([1, 5, 42, 3]));
+
+// mergeSort
+
+const merge = (arr1, arr2) => {
+  let result = [];
+  let i1 = 0;
+  let i2 = 0;
+  while (i1 < arr1.length && i2 < arr2.length) {
+    if (arr1[i1] < arr2[i2]) {
+      result.push(arr1[i1]);
+      i1++;
+    } else {
+      result.push(arr2[i2]);
+      i2++;
+    }
+  }
+  while (i1 < arr1.length) {
+    result.push(arr1[i1]);
+    i1++;
+  }
+  while (i2 < arr2.length) {
+    result.push(arr2[i2]);
+    i2++;
+  }
+  return result;
+};
+
+const mergeSort = arr => {
+  if (arr.length <= 1) return arr;
+  const arr1 = mergeSort(arr.slice(0, Math.floor(arr.length / 2)));
+  const arr2 = mergeSort(arr.slice(Math.floor(arr.length / 2)));
+  return merge(arr1, arr2);
+};
+
+console.log('mergeSort');
+console.log(mergeSort([10, 15, 27, 86, 2, 5, 16, 42, 100, 52, 13]));
