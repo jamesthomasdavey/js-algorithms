@@ -567,3 +567,32 @@ const mergeSort = arr => {
 
 console.log('mergeSort');
 console.log(mergeSort([10, 15, 27, 86, 2, 5, 16, 42, 100, 52, 13]));
+
+// quickSort
+
+const pivot = (arr, start = 0, end = arr.length) => {
+  let pivot = arr[start];
+  let swapIdx = start;
+  for (let i = start + 1; i < end; i++) {
+    if (pivot > arr[i]) {
+      swapIdx++;
+      [arr[swapIdx], arr[i]] = [arr[i], arr[swapIdx]];
+    }
+  }
+  [arr[start], arr[swapIdx]] = [arr[swapIdx], arr[start]];
+  return swapIdx;
+};
+
+const quickSort = (arr, left = 0, right = arr.length) => {
+  if (left < right) {
+    let pivotIdx = pivot(arr, left, right);
+    quickSort(arr, left, pivotIdx);
+    quickSort(arr, pivotIdx + 1, right);
+  }
+  return arr;
+};
+
+let myArr = [28, 41, 4, 11, 16, 1, 40, 14, 36, 37, 42, 18];
+
+console.log('quickSort');
+console.log(quickSort(myArr));
