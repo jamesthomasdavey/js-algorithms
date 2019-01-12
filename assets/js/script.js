@@ -598,3 +598,22 @@ console.log('quickSort');
 console.log(quickSort(myArr));
 
 // radixSort
+
+const getDigit = (num, place) => {
+  return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+};
+
+const digitCount = num => {
+  if (num === 0) return 1;
+  return Math.floor(Math.log10(Math.abs(num))) + 1;
+};
+
+const mostDigits = nums => {
+  let max = -Infinity;
+  nums.forEach(num => {
+    max = Math.max(digitCount(num), max);
+  });
+  return max;
+};
+
+console.log(mostDigits([15, 3, 5, 163, 6125, 34, 2]));
