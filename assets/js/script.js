@@ -616,4 +616,18 @@ const mostDigits = nums => {
   return max;
 };
 
-console.log(mostDigits([15, 3, 5, 163, 6125, 34, 2]));
+const radixSort = arr => {
+  const digitCount = mostDigits(arr);
+  for (let k = 0; k < digitCount; k++) {
+    const buckets = Array.from({ length: 10 }, () => []);
+    for (let i = 0; i < arr.length; i++) {
+      const digit = getDigit(arr[i], k);
+      buckets[digit].push(arr[i]);
+    }
+    arr = [].concat(...buckets);
+  }
+  return arr;
+};
+
+console.log('radixSort');
+console.log(radixSort([15, 3, 5, 163, 6125, 34, 2]));
