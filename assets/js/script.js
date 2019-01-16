@@ -650,16 +650,34 @@ class SinglyLinkedList {
     this.length = 0;
   }
   push(val) {
-    let myVal = new Node(val);
-    if (this.head === null) {
-      this.head = myVal;
-      this.tail = myVal;
+    let newNode = new Node(val);
+    if (!this.head) {
+      this.head = newNode;
+      this.tail = this.head;
     } else {
-      this.tail.next = myVal;
-      this.tail = myVal;
+      this.tail.next = newNode;
+      this.tail = newNode;
     }
     this.length++;
+    return this;
+  }
+  pop() {
+    if (!this.length) {
+      return undefined;
+    }
+    let pre = null;
+    let temp = this.head;
+    while (temp.next) {
+      pre = temp;
+      temp = temp.next;
+    }
+    pre.next = null;
+    this.tail = pre;
+    this.length--;
+    return temp;
   }
 }
 
 let list = new SinglyLinkedList();
+list.push('hello');
+console.log(list);
