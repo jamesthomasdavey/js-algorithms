@@ -662,19 +662,17 @@ class SinglyLinkedList {
     return this;
   }
   pop() {
-    if (!this.length) {
-      return undefined;
+    if (!this.head) return undefined;
+    let current = this.head;
+    let newTail = current;
+    while (current.next) {
+      newTail = current;
+      current = current.next;
     }
-    let pre = null;
-    let temp = this.head;
-    while (temp.next) {
-      pre = temp;
-      temp = temp.next;
-    }
-    pre.next = null;
-    this.tail = pre;
+    this.tail = newTail;
+    this.tail.next = null;
     this.length--;
-    return temp;
+    return current;
   }
 }
 
