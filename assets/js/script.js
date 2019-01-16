@@ -634,3 +634,32 @@ console.log(radixSort([15, 3, 5, 163, 6125, 34, 2]));
 
 // data structures
 
+// singly linked list
+
+class Node {
+  constructor(val) {
+    this.val = val;
+    this.next = null;
+  }
+}
+
+class SinglyLinkedList {
+  constructor() {
+    this.head = null;
+    this.tail = null;
+    this.length = 0;
+  }
+  push(val) {
+    let myVal = new Node(val);
+    if (this.head === null) {
+      this.head = myVal;
+      this.tail = myVal;
+    } else {
+      this.tail.next = myVal;
+      this.tail = myVal;
+    }
+    this.length++;
+  }
+}
+
+let list = new SinglyLinkedList();
