@@ -672,7 +672,21 @@ class SinglyLinkedList {
     this.tail = newTail;
     this.tail.next = null;
     this.length--;
+    if (!this.length) {
+      this.head = null;
+      this.tail = null;
+    }
     return current;
+  }
+  shift() {
+    if (!this.head) return undefined;
+    let currentHead = this.head;
+    this.head = currentHead.next;
+    length--;
+    if (!this.length) {
+      this.tail = null;
+    }
+    return currentHead;
   }
 }
 
