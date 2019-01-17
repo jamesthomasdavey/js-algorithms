@@ -710,6 +710,12 @@ class SinglyLinkedList {
     }
     return current;
   }
+  set(index, val) {
+    let foundNode = this.get(index);
+    if (!foundNode) return false;
+    foundNode.val = val;
+    return true;
+  }
 }
 
 let list = new SinglyLinkedList();
@@ -719,4 +725,4 @@ list.push('okay');
 list.push('thingy');
 list.push('stuff');
 list.push('ipad nano');
-console.log(list.get(0));
+list.set(1, 'word up');
