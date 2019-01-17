@@ -700,8 +700,23 @@ class SinglyLinkedList {
     length++;
     return this;
   }
+  get(index) {
+    if (index >= this.length || index < 0) return null;
+    let current = this.head;
+    let counter = 0;
+    while (counter < index) {
+      current = current.next;
+      counter++;
+    }
+    return current;
+  }
 }
 
 let list = new SinglyLinkedList();
 list.push('hello');
-console.log(list);
+list.push('what is this');
+list.push('okay');
+list.push('thingy');
+list.push('stuff');
+list.push('ipad nano');
+console.log(list.get(0));
